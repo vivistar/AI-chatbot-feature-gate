@@ -2,7 +2,7 @@
 
 A guided, interactive decision tool that walks designers and PMs through a five-stage gate for adding an AI chatbot — from *"does this need chat at all?"* to a copyable launch-gate brief. Grounded in Suh et al. 2026 (arXiv:2607.25057).
 
-**Live site:** https://vivistar.github.io/AI-chatbot-feature-gate/
+**Live site:** https://ai-chatbot-feature-gate.vercel.app/
 
 ## Contents
 
@@ -15,7 +15,7 @@ Both are self-contained static pages (no build step, no dependencies). Your answ
 
 ## Deploying
 
-Served as a static site via **GitHub Pages** from the `main` branch, root folder. To (re-)enable: repo **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `/ (root)`**.
+Deployed as a static site on **Vercel** from the `main` branch (Framework Preset: **Other**, no build command, output = repo root). Every push to `main` triggers a redeploy. No build step or dependencies.
 
 ## The stance
 

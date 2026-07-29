@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Use the AI Chatbot Feature Gate</title>
+  <meta name="description" content="A one-page guide for designers and PMs: what the Feature Gate is, when to use it, how to move through the seven stages, and what to do with the output.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Ctext%20y%3D'.9em'%20font-size%3D'90'%3E%F0%9F%A7%AD%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>html,body{background:#F6F5F2;}@media(prefers-color-scheme:dark){html,body{background:#070634;}}</style>
+</head>
+<body>
+<style>
+  :root{
+    /* brand primitives */
+    --terry-navy:#08064F; --terry-teal:#68CCD1; --terry-green:#619C36;
+    /* light tokens */
+    --paper:#F6F5F2; --surface:#FFFFFF; --surface-2:#ECEBE6;
+    --ink:#08064F; --ink-2:#242159; --muted:#4A4880; --faint:#86849F;
+    --line:#D0CEDF; --line-2:#C2BFD6;
+    --accent:#08064F; --accent-ink:#08064F; --accent-soft:#E7E6F3; --accent-contrast:#FFFFFF;
+    --teal:#68CCD1; --teal-ink:#2C8E96;
+    --live:#B7791F; --live-soft:#FBF0DA; --live-line:#E3C583;
+    --pass:#619C36; --pass-soft:#E7F0DD;
+    --danger:#CE3A3A; --danger-soft:#FBE3E3;
+    --shadow:0 1px 2px rgba(8,6,79,.04),0 8px 24px rgba(8,6,79,.07);
+    --on-signal:#FFFFFF;
+    --sans:'Rubik',ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --display:'Jost','Century Gothic',ui-sans-serif,"Segoe UI",Roboto,sans-serif;
+    --serif:'Cormorant Garamond',"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --mono:ui-monospace,"Cascadia Code","SF Mono",Menlo,Consolas,monospace;
+    --r:12px; --r-sm:8px; --r-xl:14px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#070634; --surface:#0D0B52; --surface-2:#161466;
+      --ink:#F6F5F2; --ink-2:#DAD9E6; --muted:#A8A6C8; --faint:#7C7AA6;
+      --line:#2A2870; --line-2:#37357E;
+      --accent:#68CCD1; --accent-ink:#8FDBDF; --accent-soft:#122A54; --accent-contrast:#08064F;
+      --teal:#68CCD1; --teal-ink:#7FD6DB;
+      --live:#E0A63E; --live-soft:#2A2213; --live-line:#5C4A22;
+      --pass:#7CBB52; --pass-soft:#15291A;
+      --danger:#F26D6D; --danger-soft:#361A1A;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+      --on-signal:#08064F;
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#F6F5F2; --surface:#FFFFFF; --surface-2:#ECEBE6;
+    --ink:#08064F; --ink-2:#242159; --muted:#4A4880; --faint:#86849F;
+    --line:#D0CEDF; --line-2:#C2BFD6;
+    --accent:#08064F; --accent-ink:#08064F; --accent-soft:#E7E6F3; --accent-contrast:#FFFFFF;
+    --teal:#68CCD1; --teal-ink:#2C8E96;
+    --live:#B7791F; --live-soft:#FBF0DA; --live-line:#E3C583;
+    --pass:#619C36; --pass-soft:#E7F0DD;
+    --danger:#CE3A3A; --danger-soft:#FBE3E3;
+    --shadow:0 1px 2px rgba(8,6,79,.04),0 8px 24px rgba(8,6,79,.07);
+    --on-signal:#FFFFFF;
+  }
+  :root[data-theme="dark"]{
+    --paper:#070634; --surface:#0D0B52; --surface-2:#161466;
+    --ink:#F6F5F2; --ink-2:#DAD9E6; --muted:#A8A6C8; --faint:#7C7AA6;
+    --line:#2A2870; --line-2:#37357E;
+    --accent:#68CCD1; --accent-ink:#8FDBDF; --accent-soft:#122A54; --accent-contrast:#08064F;
+    --teal:#68CCD1; --teal-ink:#7FD6DB;
+    --live:#E0A63E; --live-soft:#2A2213; --live-line:#5C4A22;
+    --pass:#7CBB52; --pass-soft:#15291A;
+    --danger:#F26D6D; --danger-soft:#361A1A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+    --on-signal:#08064F;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+  h1,h2,h3{text-wrap:balance;margin:0;line-height:1.16;font-family:var(--display);letter-spacing:-.02em;font-weight:600;}
+  p{margin:0;}
+  a{color:var(--accent-ink);text-underline-offset:2px;}
+
+  .wrap{max-width:780px;margin:0 auto;padding:34px clamp(18px,4vw,30px) 96px;}
+
+  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--teal-ink);display:inline-flex;align-items:center;gap:14px;}
+  .eyebrow::before{content:"";display:block;width:44px;height:1px;background:var(--teal);}
+  .mono{font-family:var(--mono);}
+
+  /* hero — navy aurora */
+  .hero{position:relative;overflow:hidden;border-radius:var(--r-xl);padding:clamp(30px,5vw,50px);
+    color:#F6F5F2;box-shadow:var(--shadow);margin-bottom:36px;border:1px solid rgba(104,204,209,.28);
+    background:#08064F;
+    background-image:linear-gradient(135deg,#08064F 0%,#1535c9 25%,#0c1ea3 50%,#1a3ed8 75%,#08064F 100%);
+    background-size:250% 250%;animation:hero-wave 20s ease-in-out infinite;}
+  @keyframes hero-wave{0%{background-position:50% 50%;}25%{background-position:80% 20%;}
+    50%{background-position:20% 80%;}75%{background-position:75% 55%;}100%{background-position:50% 50%;}}
+  .hero .eyebrow{color:var(--terry-teal);}
+  .hero .eyebrow::before{background:var(--terry-teal);}
+  .hero h1{font-size:clamp(30px,5.2vw,46px);margin-top:16px;color:#FFFFFF;}
+  .hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terry-teal);letter-spacing:0;}
+  .hero .lede{font-size:18px;font-weight:300;color:#E6E8F5;margin-top:16px;max-width:58ch;line-height:1.55;}
+  .hero .lede em{font-family:var(--serif);font-style:italic;font-size:1.08em;color:#FFFFFF;}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+  .pill{font-size:12.5px;color:#DEE0F2;background:rgba(255,255,255,.09);
+    border:1px solid rgba(104,204,209,.4);border-radius:9999px;padding:6px 14px;}
+  .pill b{color:#FFFFFF;font-weight:600;}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--terry-teal);color:#08064F;
+    text-decoration:none;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    padding:13px 24px;border-radius:9999px;transition:opacity .2s,transform .2s;}
+  .cta:hover{opacity:.9;transform:translateY(-1px);}
+  .cta .arw{font-family:var(--mono);}
+
+  /* stance */
+  .stance{border-left:3px solid var(--teal);padding:6px 0 6px 22px;margin:6px 0 40px;}
+  .stance p{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.4;font-weight:400;}
+  .stance p strong{color:var(--teal-ink);font-weight:600;font-style:normal;}
+  .stance .note{font-size:15px;color:var(--muted);margin-top:12px;font-family:var(--sans);font-style:normal;line-height:1.55;}
+
+  section{margin-bottom:40px;}
+  h2{font-size:12.5px;font-family:var(--sans);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:20px;}
+  .prose p{color:var(--ink-2);margin-bottom:14px;}
+  .prose p:last-child{margin-bottom:0;}
+  .prose strong{color:var(--ink);font-weight:600;}
+
+  .ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .ul li{position:relative;padding-left:26px;color:var(--ink-2);font-size:15.5px;}
+  .ul li::before{content:"";position:absolute;left:3px;top:9px;width:8px;height:8px;border-radius:2px;
+    background:var(--teal);transform:rotate(45deg);}
+
+  .steps{display:flex;flex-direction:column;gap:10px;}
+  .st{display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:16px 18px;box-shadow:var(--shadow);}
+  .st .num{font-family:var(--display);font-size:17px;font-weight:600;width:46px;height:46px;display:grid;place-items:center;
+    border-radius:10px;background:var(--accent-soft);color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);}
+  .st h3{font-size:16.5px;}
+  .st .do{font-size:14.5px;color:var(--ink-2);margin-top:5px;}
+  .st .get{font-size:13px;color:var(--muted);margin-top:9px;display:flex;gap:9px;align-items:baseline;}
+  .st .get .lb{font-family:var(--sans);font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-ink);
+    background:color-mix(in srgb,var(--teal) 14%,transparent);border:1px solid color-mix(in srgb,var(--teal) 30%,transparent);
+    border-radius:999px;padding:3px 9px;white-space:nowrap;flex-shrink:0;}
+  .st.stop .num{background:var(--danger-soft);color:var(--danger);border-color:color-mix(in srgb,var(--danger) 30%,transparent);}
+  .st.gate .num{background:var(--live-soft);color:var(--live);border-color:var(--live-line);}
+
+  .cards{display:grid;grid-template-columns:1fr;gap:14px;}
+  .cd{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--live);
+    border-radius:var(--r-xl);padding:16px 20px;box-shadow:var(--shadow);}
+  .cd h3{font-size:15.5px;margin-bottom:6px;}
+  .cd p{font-size:14px;color:var(--ink-2);}
+
+  .callout{display:flex;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+    padding:18px 22px;box-shadow:var(--shadow);border-left:3px solid var(--teal);}
+  .callout .k{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-ink);
+    white-space:nowrap;padding-top:3px;}
+  .callout p{font-size:14.5px;color:var(--ink-2);}
+  .callout strong{color:var(--ink);font-weight:600;}
+
+  footer{border-top:1px solid var(--line);padding-top:22px;margin-top:8px;font-size:13px;color:var(--faint);
+    font-family:var(--sans);line-height:1.7;}
+  footer code{color:var(--muted);font-family:var(--mono);}
+
+  .themebtn{position:fixed;top:14px;right:14px;z-index:5;background:var(--surface);border:1px solid var(--line-2);color:var(--muted);
+    font-size:12px;font-family:var(--sans);letter-spacing:.05em;padding:7px 13px;border-radius:9999px;cursor:pointer;box-shadow:var(--shadow);}
+  .themebtn:hover{color:var(--ink);border-color:var(--teal);}
+</style>
+
+<button class="themebtn" id="themebtn" aria-label="Toggle theme">◐ Theme</button>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">How to use · Design &amp; Launch Gate</span>
+    <h1>Deciding whether to ship an <em>AI chatbot</em></h1>
+    <p class="lede">An interactive walk-through of a five-stage decision — from <em>“should this exist at all?”</em> to <em>“what must it pass before launch?”</em> For designers and PMs evaluating a request to add a chatbot or conversational agent to a product.</p>
+    <div class="meta">
+      <span class="pill"><b>Audience</b> · designers &amp; PMs</span>
+      <span class="pill"><b>First pass</b> · 20–40 min</span>
+      <span class="pill"><b>Bring</b> · an SME for high-stakes calls</span>
+    </div>
+    <a class="cta" href="./tool.html">Open the tool <span class="arw">→</span></a>
+  </header>
+
+  <div class="stance">
+    <p>A conversational surface is <strong>a cost, not a default.</strong> Most of the gate is about refusing or narrowing the request.</p>
+    <p class="note">So treat a “no” or a “narrow it” as a successful outcome, not a failure. Your answers save in your browser as you go — you can leave and come back.</p>
+  </div>
+
+  <section>
+    <h2>When to reach for it</h2>
+    <ul class="ul">
+      <li>A request has come in to add chat, a copilot, an assistant, or a companion to a product.</li>
+      <li>You’re scoping such a feature and want the risk surface on the table <em>before</em> build, not after.</li>
+      <li>A model, prompt, or persona change is planned for a chatbot you already ship — jump to Stage 5.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How to move through it</h2>
+    <p class="prose" style="margin-bottom:20px;color:var(--muted);font-size:14.5px">Work the stages in order the first time — each one feeds the next. Use the <b class="mono" style="color:var(--ink-2)">Reference</b> button any time for the 12 attack patterns and the SugarSage worked example.</p>
+    <div class="steps">
+      <div class="st stop"><div class="num">0</div><div>
+        <h3>Does it need chat?</h3>
+        <div class="do">List the real jobs users would do; tag each <em>structured-UI</em> or <em>needs-conversation</em>.</div>
+        <div class="get"><span class="lb">You get</span><span>A verdict. If every job is structured-UI, stop — you don’t need a chatbot.</span></div>
+      </div></div>
+      <div class="st"><div class="num">1</div><div>
+        <h3>Scope</h3>
+        <div class="do">Choose <em>utility</em> or <em>support / companion</em>, on purpose.</div>
+        <div class="get"><span class="lb">You get</span><span>A recorded scope and boundary. Default to the narrowest that does the job.</span></div>
+      </div></div>
+      <div class="st"><div class="num">2</div><div>
+        <h3>Which harms are live?</h3>
+        <div class="do">Answer five yes/no questions and watch the harm board light up and prune.</div>
+        <div class="get"><span class="lb">You get</span><span>The harm directions to design against and test for.</span></div>
+      </div></div>
+      <div class="st"><div class="num">3</div><div>
+        <h3>Pass behaviors</h3>
+        <div class="do">Edit the seeded behavior for each live harm.</div>
+        <div class="get"><span class="lb">You get</span><span>Your spec: the observable behaviors the agent must exhibit.</span></div>
+      </div></div>
+      <div class="st gate"><div class="num">4</div><div>
+        <h3>Launch gate</h3>
+        <div class="do">Set the pass criteria and the over-correction ceiling.</div>
+        <div class="get"><span class="lb">You get</span><span>The acceptance test the feature must clear to ship.</span></div>
+      </div></div>
+      <div class="st"><div class="num">5</div><div>
+        <h3>After launch</h3>
+        <div class="do">Read the standing obligations.</div>
+        <div class="get"><span class="lb">You get</span><span>The re-run and monitoring discipline.</span></div>
+      </div></div>
+      <div class="st"><div class="num">6</div><div>
+        <h3>Decision brief</h3>
+        <div class="do">Copy or print.</div>
+        <div class="get"><span class="lb">You get</span><span>A record to paste into a spec, ticket, or launch doc.</span></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What to do with the output</h2>
+    <div class="callout">
+      <span class="k">The deliverable</span>
+      <p>The <strong>decision brief</strong> from Stage 6 is what you hand off. Paste it into the feature’s spec or ticket so the scope decision, the live harms, the pass behaviors, and the launch gate travel with the work. The Stage 4 gate is not a report you file after — it’s the condition for shipping. <strong>If the feature can’t clear it, it doesn’t ship</strong>, or it ships with the failing capability disabled.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Three things to get right</h2>
+    <div class="cards">
+      <div class="cd"><h3>Write the pass behaviors before you build</h3>
+        <p>An unbuilt feature can be designed <em>around</em> them instead of retrofitted. This is the advantage most teams don’t get — use it.</p></div>
+      <div class="cd"><h3>Bring the right people to the high-stakes rows</h3>
+        <p>Anything marked <em>high-stakes</em> — crisis, vulnerability, safety handoff, false certainty — needs clinical and lived-experience review to set the pass criteria. Not designer intuition, and not an LLM judge.</p></div>
+      <div class="cd"><h3>Passing ≠ safe</h3>
+        <p>It means no known, scoped structural failures. Out-of-scope classes — deception, prompt injection, data security, bias, and anything involving minors — remain untested and need their own safeguards.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    Grounded in Suh et&nbsp;al. 2026 (arXiv:2607.25057).<br>
+    Companion source docs: <code>ai-chatbot-feature-gate.md</code> · <code>red-team-template.md</code> · <code>sugarsage-red-team-set.md</code>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("themebtn").addEventListener("click",function(){
+    var root=document.documentElement,cur=root.getAttribute("data-theme");
+    var isDark=cur?cur==="dark":window.matchMedia("(prefers-color-scheme:dark)").matches;
+    root.setAttribute("data-theme",isDark?"light":"dark");
+  });
+</script>
+
+</body>
+</html>

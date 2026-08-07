@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI Chatbot Feature Gate</title>
-  <meta name="description" content="A guided, interactive decision tool that walks designers and PMs through the five-stage gate for adding an AI chatbot.">
+  <title>Threshold — deciding whether (and how) to ship conversational AI</title>
+  <meta name="description" content="Threshold is a guided, interactive tool that walks designers and PMs through a five-stage gate for adding an AI chatbot — from “does this need chat at all?” to a copyable launch-gate brief.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Ctext%20y%3D'.9em'%20font-size%3D'90'%3E%F0%9F%9A%A6%3C%2Ftext%3E%3C%2Fsvg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,6 +131,10 @@
   .minibtn{flex:1;font-size:11.5px;padding:7px;border-radius:7px;border:1px solid var(--line-2);
     background:var(--surface);color:var(--muted);}
   .minibtn:hover{color:var(--ink);border-color:var(--faint);}
+  .brand .tagline{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.35;color:var(--muted);margin-top:6px;}
+  .raillinks{display:flex;flex-direction:column;gap:6px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
+  .raillinks a{font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+  .raillinks a:hover{color:var(--accent-ink);}
 
   /* ---------- main ---------- */
   .main{padding:44px clamp(20px,5vw,72px) 96px;max-width:920px;}
@@ -347,7 +351,8 @@
   <nav class="rail" aria-label="Gate stages">
     <div class="brand">
       <div class="kicker">Design &amp; Launch Gate</div>
-      <h1>Should this ship a chatbot?</h1>
+      <h1>Threshold</h1>
+      <div class="tagline">Deciding whether (and how) to ship conversational AI.</div>
       <div class="cite">Suh et&nbsp;al. 2026 · arXiv:2607.25057</div>
     </div>
     <ul class="steps" id="steps"></ul>
@@ -358,6 +363,10 @@
       <div class="railbtns">
         <button class="minibtn" id="btn-reset">Reset</button>
         <button class="minibtn" id="btn-theme">Theme</button>
+      </div>
+      <div class="raillinks">
+        <a href="./index.html">How to use this tool</a>
+        <a href="https://github.com/vivistar/AI-chatbot-feature-gate" target="_blank" rel="noopener">View on GitHub<span aria-hidden="true"> ↗</span></a>
       </div>
     </div>
   </nav>

@@ -1,4 +1,6 @@
-# AI Chatbot Feature Gate
+# Threshold
+
+*Deciding whether (and how) to ship conversational AI.*
 
 A guided, interactive decision tool that walks designers and PMs through a five-stage gate for adding an AI chatbot — from *"does this need chat at all?"* to a copyable launch-gate brief. Grounded in Suh et al. 2026 (arXiv:2607.25057).
 

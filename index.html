@@ -81,6 +81,10 @@
   p{margin:0;}
   a{color:var(--accent-ink);text-underline-offset:2px;}
 
+  .statusstrip{width:100%;background:var(--live-soft);border-bottom:1px solid var(--live-line);
+    color:var(--live);font-size:13px;font-weight:500;text-align:center;padding:9px 16px;
+    display:flex;align-items:center;justify-content:center;gap:9px;line-height:1.35;}
+  .statusstrip .dot{width:8px;height:8px;border-radius:50%;background:var(--live);flex-shrink:0;}
   .wrap{max-width:780px;margin:0 auto;padding:34px clamp(18px,4vw,30px) 96px;}
 
   .eyebrow{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
@@ -102,6 +106,7 @@
   .hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terry-teal);letter-spacing:0;}
   .hero .lede{font-size:18px;font-weight:300;color:#E6E8F5;margin-top:16px;max-width:58ch;line-height:1.55;}
   .hero .lede em{font-family:var(--serif);font-style:italic;font-size:1.08em;color:#FFFFFF;}
+  .hero .subhead{font-family:var(--display);font-weight:500;font-size:19px;color:var(--terry-teal);margin-top:10px;letter-spacing:-.01em;}
   .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
   .pill{font-size:12.5px;color:#DEE0F2;background:rgba(255,255,255,.09);
     border:1px solid rgba(104,204,209,.4);border-radius:9999px;padding:6px 14px;}
@@ -168,10 +173,13 @@
 
 <button class="themebtn" id="themebtn" aria-label="Toggle theme">◐ Theme</button>
 
+<div class="statusstrip"><span class="dot" aria-hidden="true"></span>Status: experimental — a working decision aid, not validated guidance</div>
+
 <div class="wrap">
   <header class="hero">
-    <span class="eyebrow">How to use · Threshold</span>
+    <span class="eyebrow">How to use · Threshold v0.1</span>
     <h1>Deciding whether <em>(and how)</em> to ship conversational AI</h1>
+    <p class="subhead">Threshold: An AI-chatbot feature gate.</p>
     <p class="lede"><strong>Threshold</strong> is an interactive walk-through of a five-stage decision — from <em>“should this exist at all?”</em> to <em>“what must it pass before launch?”</em> For designers and PMs evaluating a request to add a chatbot or conversational agent to a product.</p>
     <div class="meta">
       <span class="pill"><b>Audience</b> · designers &amp; PMs</span>
